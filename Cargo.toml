@@ -1,0 +1,16 @@
+[package]
+name = "rustfmt-unstable"
+version = "0.1.0"
+edition = "2021"
+authors = ["Justus Fluegel <justusfluegel@gmail.com>"]
+license = "MIT OR Apache-2.0"
+description = "A wrapper around cargo fmt or rustfmt for parsing a config file and passing it as cli args instead"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+clap = { version = "4.4.16", features = ["derive", "unicode"] }
+itertools = "0.12.0"
+miette = { version = "5.10.0", features = ["fancy"] }
+semver = "1.0.21"
+toml = "0.8.8"
