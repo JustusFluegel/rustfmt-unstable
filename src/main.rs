@@ -101,6 +101,8 @@ fn main() -> miette::Result<()> {
     if let Some(index) = config_index {
         rest.insert(index, "--config".to_string());
         rest.insert(index + 1, config_options);
+        rest.insert(index + 2, "--config-path".to_string());
+        rest.insert(index + 3, empty_config_loc.to_string());
     } else {
         rest.push("--config".to_string());
         rest.push(config_options);
