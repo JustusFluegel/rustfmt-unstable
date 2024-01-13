@@ -24,7 +24,6 @@ fn main() -> miette::Result<()> {
         mut rest,
     } = Args::parse();
 
-    dbg!(&rest);
     let mut config_contents = Vec::new();
 
     if let Some(config_path) = config_file {
@@ -97,13 +96,19 @@ fn main() -> miette::Result<()> {
         );
     }
 
+    let empty_config_loc = "./rustfmt_unstable_empty_config_file_abcbebdbebeb.toml";
+
     if let Some(index) = config_index {
         rest.insert(index, "--config".to_string());
         rest.insert(index + 1, config_options);
     } else {
         rest.push("--config".to_string());
         rest.push(config_options);
+        rest.push("--config-path".to_string());
+        rest.push(empty_config_loc.to_string());
     }
+
+    std::fs::File::create(empty_config_loc).into_diagnostic()?;
 
     let (program, args) = rest
         .split_first()
@@ -118,6 +123,8 @@ fn main() -> miette::Result<()> {
         .into_diagnostic()?
         .wait()
         .into_diagnostic()?;
+
+    std::fs::remove_file(empty_config_loc).into_diagnostic()?;
 
     if let Some(code) = status.code() {
         std::process::exit(code);
