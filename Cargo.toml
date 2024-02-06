@@ -1,16 +1,24 @@
 [package]
 name = "rustfmt-unstable"
-version = "0.2.1"
+version = "0.2.2"
 edition = "2021"
 authors = ["Justus Fluegel <justusfluegel@gmail.com>"]
 license = "MIT OR Apache-2.0"
 description = "A wrapper around cargo fmt or rustfmt for parsing a config file and passing it as cli args instead"
+categories = ["command-line-utilities"]
+keywords = ["rustfmt", "cargo-fmt", "wrapper", "config"]
+repository = "https://github.com/JustusFluegel/rustfmt-unstable"
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [dependencies]
+cargo_metadata = { version = "0.18.1", optional = true }
 clap = { version = "4.4.16", features = ["derive", "unicode"] }
 itertools = "0.12.0"
-miette = { version = "5.10.0", features = ["fancy"] }
+miette = { version = "7.0.0", features = ["fancy"] }
 semver = "1.0.21"
 toml = "0.8.8"
+
+[features]
+default = ["auto-resolve"]
+auto-resolve = ["dep:cargo_metadata"]
