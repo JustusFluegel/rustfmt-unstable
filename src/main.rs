@@ -10,10 +10,12 @@ use miette::IntoDiagnostic;
 
 #[derive(Parser)]
 struct Args {
-    #[arg(short, long)]
-    config_file: Option<Utf8PathBuf>,
     #[arg(short = 'f', long)]
+    config_file: Option<Utf8PathBuf>,
+    #[arg(short, long)]
     config: Option<String>,
+    #[arg(short = 'a', long)]
+    apply: bool,
     rest: Vec<String>,
 }
 
@@ -22,6 +24,7 @@ fn main() -> miette::Result<()> {
         mut config_file,
         config,
         mut rest,
+        apply,
     } = Args::parse();
 
     let mut config_contents = Vec::new();
@@ -109,10 +112,23 @@ fn main() -> miette::Result<()> {
 
     if rest.is_empty() {
         rest.extend(
-            ["cargo", "fmt", "--all", "--check", "--"]
-                .into_iter()
-                .map(ToOwned::to_owned),
+            [
+                "cargo",
+                "fmt",
+                "--all",
+                if apply { "" } else { "--check" },
+                "--",
+            ]
+            .into_iter()
+            .filter(|a| !a.is_empty())
+            .map(ToOwned::to_owned),
         );
+    }
+
+    if rest.iter().zip(["cargo", "fmt"]).all(|(a, b)| a == b)
+        && rest.iter().all(|segment| segment.trim() != "--")
+    {
+        rest.push("--".to_owned());
     }
 
     let empty_config_loc = "./rustfmt_unstable_empty_config_file_abcbebdbebeb.toml";
