@@ -12,12 +12,12 @@ repository = "https://github.com/JustusFluegel/rustfmt-unstable"
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [dependencies]
-cargo_metadata = { version = "0.18.1", optional = true }
-clap = { version = "4.4.16", features = ["derive", "unicode"] }
-itertools = "0.12.0"
-miette = { version = "7.0.0", features = ["fancy"] }
-semver = "1.0.21"
-toml = "0.8.8"
+cargo_metadata = { version = "0.23.0", optional = true }
+clap = { version = "4.5.51", features = ["derive", "unicode"] }
+itertools = "0.14.0"
+miette = { version = "7.6.0", features = ["fancy"] }
+semver = "1.0.27"
+toml = "0.9.8"
 
 [features]
 default = ["auto-resolve"]
