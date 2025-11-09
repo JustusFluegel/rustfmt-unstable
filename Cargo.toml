@@ -8,6 +8,13 @@ description = "A wrapper around cargo fmt or rustfmt for parsing a config file a
 categories = ["command-line-utilities"]
 keywords = ["rustfmt", "cargo-fmt", "wrapper", "config"]
 repository = "https://github.com/JustusFluegel/rustfmt-unstable"
+homepage = "https://github.com/JustusFluegel/rustfmt-unstable"
+
+[package.metadata.wix]
+upgrade-guid = "59752746-2C99-4B97-9D99-005955D06989"
+path-guid = "DC088F5A-0111-4CBD-BEC2-B14585C97B78"
+license = false
+eula = false
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
@@ -22,3 +29,8 @@ toml = "0.9.8"
 [features]
 default = ["auto-resolve"]
 auto-resolve = ["dep:cargo_metadata"]
+
+# The profile that 'dist' will build with
+[profile.dist]
+inherits = "release"
+lto = true
