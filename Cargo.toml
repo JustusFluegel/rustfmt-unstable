@@ -10,12 +10,6 @@ keywords = ["rustfmt", "cargo-fmt", "wrapper", "config"]
 repository = "https://github.com/JustusFluegel/rustfmt-unstable"
 homepage = "https://github.com/JustusFluegel/rustfmt-unstable"
 
-[package.metadata.wix]
-upgrade-guid = "59752746-2C99-4B97-9D99-005955D06989"
-path-guid = "DC088F5A-0111-4CBD-BEC2-B14585C97B78"
-license = false
-eula = false
-
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [dependencies]
